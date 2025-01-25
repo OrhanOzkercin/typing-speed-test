@@ -32,7 +32,7 @@ const Header = () => {
           </Link>
           
           <nav className="flex items-center gap-6">
-            <Link to="/">
+            <Link to="/test">
               <Button 
                 variant="ghost" 
                 className="font-mono text-sm tracking-wide hover:text-primary"
@@ -40,20 +40,22 @@ const Header = () => {
                 Practice
               </Button>
             </Link>
-            <Link to="/stats">
+            <Link to="/result">
               <Button 
                 variant="ghost" 
                 className="font-mono text-sm tracking-wide hover:text-primary"
               >
-                Stats
+                Results
               </Button>
             </Link>
-            <Button 
-              className="font-mono text-sm tracking-wide"
-              variant="outline"
-            >
-              Start Test
-            </Button>
+            <Link to="/test">
+              <Button 
+                className="font-mono text-sm tracking-wide"
+                variant="outline"
+              >
+                Start Test
+              </Button>
+            </Link>
           </nav>
         </div>
       </div>

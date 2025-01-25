@@ -8,9 +8,10 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-import styles from "~/styles/tailwind.css?url";
-import Header from "~/components/header";
-import { FocusModeProvider } from "~/contexts/focus-mode-context";
+import styles from "./styles/tailwind.css?url";
+import Header from "./components/header";
+import { FocusModeProvider } from "./contexts/focus-mode-context";
+import { Toaster } from "./components/ui/toaster"
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -37,6 +38,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <Toaster />
       </body>
     </html>
   );

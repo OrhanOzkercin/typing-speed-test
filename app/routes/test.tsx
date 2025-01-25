@@ -5,11 +5,17 @@ import { Timer, RefreshCcw, Dumbbell } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { useFocusMode } from "~/contexts/focus-mode-context";
 import { getTextsByDifficulty, type TypingText } from "~/data/typing-texts";
-import { useNavigate } from "@remix-run/react";
+import { useNavigate, useSubmit, useActionData } from "@remix-run/react";
+import { useToast } from "~/components/ui/use-toast";
+
+type ActionData = {
+  error?: string;
+  success?: boolean;
+};
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 
-const TIME_LIMIT = 60; // 60 seconds
+const TIME_LIMIT = 60; // 60 seconds for testing
 
 export default function TestPage() {
   const [isStarted, setIsStarted] = useState(false);
@@ -26,6 +32,10 @@ export default function TestPage() {
   const [correctWords, setCorrectWords] = useState(0);
   const [countdown, setCountdown] = useState<number | null>(null);
   const navigate = useNavigate();
+  const submit = useSubmit();
+  const { toast } = useToast();
+  const actionData = useActionData<ActionData>();
+  const [isSaving, setIsSaving] = useState(false);
 
   // Manage focus mode based on test state
   useEffect(() => {
@@ -86,6 +96,30 @@ export default function TestPage() {
 
     return () => clearTimeout(timeoutId);
   }, [countdown]);
+
+  // Add this effect to show toast messages from the action
+  useEffect(() => {
+    if (actionData?.error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: actionData.error
+      });
+    } else if (actionData?.success) {
+      toast({
+        title: "Success",
+        description: "Your test results have been saved!"
+      });
+    }
+  }, [actionData, toast]);
+
+  // Add useEffect for focus handling
+  useEffect(() => {
+    if (isStarted) {
+      const textarea = document.querySelector('textarea');
+      textarea?.focus();
+    }
+  }, [isStarted]);
 
   const handleStart = () => {
     if (!selectedDifficulty) return;
@@ -165,17 +199,59 @@ export default function TestPage() {
     }
   };
 
-  const handleTestComplete = () => {
+  const handleTestComplete = async () => {
     setIsActive(false);
-    const result = {
-      wpm: calculateWPM(),
-      accuracy: calculateAccuracy(),
+    
+    if (!selectedDifficulty) return;
+
+    const wpm = calculateWPM();
+    const accuracy = calculateAccuracy();
+    
+    console.log("Test completed with results:", {
+      wpm,
+      accuracy,
       correctWords,
-      totalTypedWords
+      totalTypedWords,
+      difficulty: selectedDifficulty
+    });
+
+    const result = {
+      wpm,
+      accuracy,
+      correctWords,
+      totalTypedWords,
+      difficulty: selectedDifficulty
     };
     
-    // Navigate to result page with test data
-    navigate("/result", { state: result });
+    try {
+      setIsSaving(true);
+      console.log("Submitting result:", result);
+      
+      // First submit the data
+      await submit(
+        result,
+        { 
+          method: "post",
+          action: "/api/test-results",
+          encType: "application/json"
+        }
+      );
+
+      // Then navigate in a separate effect
+      setTimeout(() => {
+        navigate("/result", { state: result });
+      }, 0);
+      
+    } catch (error) {
+      console.error("Save error:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to save your results. Please try again."
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const calculateWPM = () => {
@@ -203,7 +279,6 @@ export default function TestPage() {
               const isCompleted = index < currentWordIndex;
               const isCurrent = index === currentWordIndex;
               const completedWord = completedWords[index];
-              const isCurrentlyTyping = isCurrent && typedText.length > 0;
               const isCorrectSoFar = isCurrent && 
                 word.startsWith(currentTypedWord) && 
                 currentTypedWord.length > 0;
@@ -213,7 +288,7 @@ export default function TestPage() {
 
               return (
                 <span
-                  key={`word-${currentLineIndex}-${word}-${index}`}
+                  key={`${currentLineIndex}-${word}-${index}-${currentText.id}`}
                   className={cn(
                     // Base styles
                     "px-1 rounded transition-colors",
@@ -369,16 +444,25 @@ export default function TestPage() {
                     "bg-background shadow-lg ring-1 ring-primary/10"
                   )}
                   placeholder="Start typing..."
-                  autoFocus
                 />
                 <div className="flex justify-end gap-4">
                   <Button 
                     variant="outline"
                     onClick={handleRestart}
                     className="font-mono opacity-30 hover:opacity-100 transition-opacity"
+                    disabled={isSaving}
                   >
-                    <RefreshCcw className="w-4 h-4 mr-2" />
-                    Restart
+                    {isSaving ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCcw className="w-4 h-4 mr-2" />
+                        Restart
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>
