@@ -1,6 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button } from "~/components/ui/button";
-import { Keyboard } from "lucide-react";
 import { AnimatedBackground } from "~/components/animated-background";
 import { Link } from "@remix-run/react";
 import { ComputerDesktopIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -24,7 +23,7 @@ export default function Index() {
             {/* Icon */}
             <div className="flex justify-center">
               <div className="rounded-full bg-primary/10 p-4 ring-1 ring-primary/20 relative">
-                <Keyboard className="h-10 w-10 text-primary rotate-[-10deg] transform" />
+                <ComputerDesktopIcon className="h-10 w-10 text-primary rotate-[-10deg] transform" />
                 <div className="absolute -inset-0.5 bg-primary/10 blur-sm rounded-full" />
               </div>
             </div>

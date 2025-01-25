@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import {
-  Type,
-  Timer,
-  Percent,
-  KeySquare,
-  Keyboard,
-  BarChart,
-  Clock,
-  KeyRound,
-  Gamepad2,
-  MousePointer,
-  Hash,
-  Sparkles,
-  Sigma,
-} from "lucide-react";
+  DocumentTextIcon,
+  ClockIcon,
+  BeakerIcon,
+  ComputerDesktopIcon,
+  KeyIcon,
+  ChartBarIcon,
+  ClockIcon as Clock2Icon,
+  HashtagIcon,
+  SparklesIcon,
+  CursorArrowRaysIcon,
+  CommandLineIcon,
+  CalculatorIcon,
+  PuzzlePieceIcon,
+} from "@heroicons/react/24/outline";
 
 type BackgroundIcon = {
-  icon: typeof Keyboard;
+  icon: typeof ComputerDesktopIcon;
   size: number;
   position: {
     top: number;
@@ -49,19 +49,19 @@ export function AnimatedBackground() {
 
   useEffect(() => {
     const icons = [
-      Type,
-      Keyboard,
-      Timer,
-      KeyRound,
-      Clock,
-      KeySquare,
-      BarChart,
-      Gamepad2,
-      Percent,
-      MousePointer,
-      Hash,
-      Sparkles,
-      Sigma,
+      DocumentTextIcon,
+      ComputerDesktopIcon,
+      ClockIcon,
+      KeyIcon,
+      Clock2Icon,
+      CommandLineIcon,
+      ChartBarIcon,
+      PuzzlePieceIcon,
+      BeakerIcon,
+      CursorArrowRaysIcon,
+      HashtagIcon,
+      SparklesIcon,
+      CalculatorIcon,
     ];
 
     const cellSize = 120;
@@ -82,7 +82,7 @@ export function AnimatedBackground() {
           top: pos.row * cellSize + Math.random() * cellSize * 0.3,
           left: pos.col * cellSize + Math.random() * cellSize * 0.3,
         },
-        rotation: Math.random() * 360 ,
+        rotation: Math.random() * 360,
         opacity: Math.random() * 0.15 + 0.05,
         color: colors[Math.floor(Math.random() * colors.length)],
         animation: {
