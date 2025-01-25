@@ -1,9 +1,16 @@
 /** @type {import('@remix-run/dev').AppConfig} */
-export default { // Changed from module.exports
+export default {
   serverBuildTarget: "vercel",
-  server: process.env.NODE_ENV === "production" ? "./server.js" : undefined,
+  server: "./server.js",
+  serverBuildPath: "build/index.js",
   ignoredRouteFiles: ["**/.*"],
+  serverModuleFormat: "esm",
+  serverDependenciesToBundle: [
+    "@prisma/client",
+    ".prisma/client"
+  ],
   future: {
-    unstable_nodeModules: ["@prisma/client"]
-  }
+    unstable_nodeModules: ["@prisma/client"],
+    v3_fetcherPersist: true,
+  },
 };
