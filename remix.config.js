@@ -2,5 +2,6 @@
 export default {
   ignoredRouteFiles: ["**/.*"],
   serverModuleFormat: "esm",
- 
+  serverBuildTarget: "vercel",
+  server: "./server.js",
 }; 
