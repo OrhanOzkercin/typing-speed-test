@@ -1,10 +1,17 @@
 import { Link } from "@remix-run/react"
 import { Button } from "~/components/ui/button"
 import { Keyboard } from "lucide-react"
+import { useFocusMode } from "~/contexts/focus-mode-context"
+import { cn } from "~/lib/utils"
 
 const Header = () => {
+  const { isFocusMode } = useFocusMode()
+
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={cn(
+      "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-700",
+      isFocusMode && "opacity-15 hover:opacity-100 "
+    )}>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link 

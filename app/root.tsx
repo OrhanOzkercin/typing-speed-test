@@ -10,6 +10,7 @@ import type { LinksFunction } from "@remix-run/node";
 
 import styles from "~/styles/tailwind.css?url";
 import Header from "~/components/header";
+import { FocusModeProvider } from "~/contexts/focus-mode-context";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -25,12 +26,14 @@ export default function App() {
         <Links />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-        </div>
+        <FocusModeProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+          </div>
+        </FocusModeProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
