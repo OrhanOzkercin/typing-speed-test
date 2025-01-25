@@ -10,7 +10,4 @@ node_modules
 /public/build
 .DS_Store
 
-/prisma/dev.db
-/prisma/dev.db-journal
-
 .vercel
