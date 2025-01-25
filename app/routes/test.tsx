@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatedBackground } from "~/components/animated-background";
 import { Button } from "~/components/ui/button";
-import { Timer, RefreshCcw, Dumbbell } from "lucide-react";
+import { ClockIcon, ArrowPathIcon, AcademicCapIcon } from "@heroicons/react/24/outline";
 import { cn } from "~/lib/utils";
 import { useFocusMode } from "~/contexts/focus-mode-context";
 import { getTextsByDifficulty, type TypingText } from "~/data/typing-texts";
@@ -349,12 +349,7 @@ export default function TestPage() {
               timeLeft <= 30 && "ring-2 ring-primary/50 shadow-lg shadow-primary/20"
             )}>
               <div className="flex items-center gap-2">
-                <Timer className={cn(
-                  "w-4 h-4",
-                  timeLeft <= 10 ? "text-red-500" : 
-                  timeLeft <= 30 ? "text-yellow-500" : 
-                  "text-primary"
-                )} />
+                <ClockIcon className="h-5 w-5" />
                 <span className={cn(
                   "font-mono text-2xl font-bold",
                   timeLeft <= 10 && "text-red-500 animate-pulse",
@@ -406,7 +401,7 @@ export default function TestPage() {
                             )}
                             onClick={() => setSelectedDifficulty(difficulty)}
                           >
-                            <Dumbbell className="mr-2 h-4 w-4" />
+                            <AcademicCapIcon className="h-5 w-5" />
                             {difficulty}
                           </Button>
                         ))}
@@ -459,7 +454,7 @@ export default function TestPage() {
                       </>
                     ) : (
                       <>
-                        <RefreshCcw className="w-4 h-4 mr-2" />
+                        <ArrowPathIcon className="h-5 w-5" />
                         Restart
                       </>
                     )}

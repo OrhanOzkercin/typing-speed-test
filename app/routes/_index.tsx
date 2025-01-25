@@ -1,8 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button } from "~/components/ui/button";
-import { Keyboard, ArrowRight } from "lucide-react";
+import { Keyboard } from "lucide-react";
 import { AnimatedBackground } from "~/components/animated-background";
 import { Link } from "@remix-run/react";
+import { ComputerDesktopIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export const meta: MetaFunction = () => {
   return [
@@ -48,7 +49,7 @@ export default function Index() {
               <Link to="/test">
                 <Button size="lg" className="font-mono text-base tracking-wide group relative">
                   <span className="relative z-10">Start Typing Test</span>
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
+                  <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 relative z-10" />
                   <div className="absolute inset-0 bg-primary/10 blur group-hover:bg-primary/20 transition-colors" />
                 </Button>
               </Link>

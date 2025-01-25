@@ -1,6 +1,12 @@
 import { useNavigate, useLocation, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
-import { Target, Keyboard, RotateCcw, Gauge, Zap } from "lucide-react";
+import { 
+  ArrowUpOnSquareIcon, 
+  ComputerDesktopIcon, 
+  ArrowPathIcon,
+  ChartBarIcon,
+  BoltIcon
+} from "@heroicons/react/24/outline";
 import { cn } from "~/lib/utils";
 import { AnimatedBackground } from "~/components/animated-background";
 import type { LoaderFunction } from "@remix-run/node";
@@ -79,7 +85,7 @@ export default function ResultPage() {
                 </h1>
                 <div className="flex flex-col items-center gap-2">
                   <div className="flex items-center gap-2">
-                    <Zap className={cn("w-5 h-5", getSpeedRating(result.wpm).color)} />
+                    <BoltIcon className={cn("w-5 h-5", getSpeedRating(result.wpm).color)} />
                     <p className={cn("text-xl font-mono", getSpeedRating(result.wpm).color)}>
                       {getSpeedRating(result.wpm).text} Typist
                     </p>
@@ -93,7 +99,7 @@ export default function ResultPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-3xl">
                 <div className="bg-background/80 backdrop-blur-sm rounded-lg p-6 border shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <div className="flex flex-col items-center space-y-2">
-                    <Gauge className="w-8 h-8 text-primary" />
+                    <ChartBarIcon className="w-8 h-8 text-primary" />
                     <h2 className="text-sm font-mono text-muted-foreground">Words per Minute</h2>
                     <p className="text-3xl font-mono font-bold text-primary">{result.wpm}</p>
                     <p className="text-sm font-mono text-muted-foreground">{result.wpm * 5} CPM</p>
@@ -102,7 +108,7 @@ export default function ResultPage() {
 
                 <div className="bg-background/80 backdrop-blur-sm rounded-lg p-6 border shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <div className="flex flex-col items-center space-y-2">
-                    <Target className="w-8 h-8 text-green-500" />
+                    <ArrowUpOnSquareIcon className="w-8 h-8 text-green-500" />
                     <h2 className="text-sm font-mono text-muted-foreground">Accuracy</h2>
                     <p className="text-3xl font-mono font-bold text-green-500">{result.accuracy}%</p>
                     <p className="text-sm font-mono text-muted-foreground">{result.correctWords} correct words</p>
@@ -111,7 +117,7 @@ export default function ResultPage() {
 
                 <div className="bg-background/80 backdrop-blur-sm rounded-lg p-6 border shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <div className="flex flex-col items-center space-y-2">
-                    <Keyboard className="w-8 h-8 text-blue-500" />
+                    <ComputerDesktopIcon className="w-8 h-8 text-blue-500" />
                     <h2 className="text-sm font-mono text-muted-foreground">Words Typed</h2>
                     <p className="text-3xl font-mono font-bold text-blue-500">{result.totalTypedWords}</p>
                     <p className="text-sm font-mono text-muted-foreground">{Math.round(result.totalTypedWords / 60)} words/sec</p>
@@ -190,7 +196,7 @@ export default function ResultPage() {
               className="font-mono group"
               size="lg"
             >
-              <RotateCcw className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
+              <ArrowPathIcon className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
               {result ? "Try Again" : "Start New Test"}
             </Button>
           </div>
