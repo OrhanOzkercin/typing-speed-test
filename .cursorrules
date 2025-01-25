@@ -1,0 +1,103 @@
+{
+  "projectMeta": {
+    "name": "TypingSpeedTester",
+    "description": "A typing speed test application built with Remix.run, TypeScript, Tailwind CSS, and Shadcn UI. The application highlights correct and incorrect typing in real time and calculates typing speed.",
+    "version": "1.0.0"
+  },
+  "prompts": {
+    "projectContext": "You are an AI code assistant for a typing speed test application. The main goals are: real-time text highlighting, accurate speed calculation, responsive UI, and accessibility improvements. Tailwind CSS and Shadcn UI are used for styling, while logic and state are managed in TypeScript with Remix.run.",
+    "notes": "Focus on clean, reusable components and real-time user feedback mechanisms. Ensure robust error handling and clear visual cues for incorrect input."
+  },
+  "technologies": {
+    "frontend": [
+      "Remix.run",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Shadcn UI"
+    ],
+    "stateManagement": "Built-in Remix state handling",
+    "testing": [
+      "Jest",
+      "React Testing Library"
+    ],
+    "developmentTools": [
+      "ESLint",
+      "Prettier"
+    ],
+    "analytics": "Custom typing speed logic integrated directly into the app"
+  },
+  "globalRules": {
+    "autoGenerateComments": true,
+    "preferArrowFunctions": true,
+    "eslintOnSave": true,
+    "prettierOnSave": true,
+    "strictTypeScript": true
+  },
+  "languageSettings": {
+    "typescript": {
+      "strict": true
+    },
+    "react": {
+      "convertClassComponentsToFunctional": true,
+      "preferCompoundComponents": true
+    }
+  },
+  "transformations": [
+    {
+      "id": "highlightTextLogic",
+      "enabled": true,
+      "description": "Implement logic to highlight correctly and incorrectly typed words."
+    },
+    {
+      "id": "typingSpeedCalculation",
+      "enabled": true,
+      "description": "Accurately calculate words per minute based on elapsed time and input text."
+    },
+    {
+      "id": "optimizeImports",
+      "enabled": true,
+      "description": "Remove unused imports and organize import statements."
+    },
+    {
+      "id": "preferShadcnUI",
+      "enabled": true,
+      "description": "Encourage the use of Shadcn UI components for consistent design and styling."
+    }
+  ],
+  "fileExtensions": {
+    ".tsx": {
+      "autoWrapUseMemo": false,
+      "autoWrapUseCallback": false
+    },
+    ".ts": {
+      "autoGenerateComments": false
+    }
+  },
+  "customRules": {
+    "uiLibrary": "shadcn/ui",
+    "useTailwind": true,
+    "tailwindConfigPath": "tailwind.config.js",
+    "pathAliases": {
+      "@components": "src/components",
+      "@lib": "src/lib"
+    },
+    "enforceAccessibility": true,
+    "highlightErrors": "Incorrect input is marked with a red highlight, and users are notified visually.",
+    "reactErrorHandling": "Handle UI and logical errors with toasts or error boundaries."
+  },
+  "designSystem": {
+    "enforceDesignTokens": true,
+    "colors": "Use colors defined in src/constants/colors.ts",
+    "spacing": "Use spacing tokens from src/constants/spacing.ts",
+    "typography": {
+      "fonts": "Use font-sans class and typography components from @/components/ui/typography",
+      "sizes": "Follow typography scale defined in constants/typography.ts",
+      "weights": "Use font weights defined in constants/typography.ts"
+    },
+    "components": {
+      "preferCustom": false,
+      "description": "Utilize Shadcn UI components wherever possible for consistency. Create reusable components for additional functionality."
+    }
+  }
+}
