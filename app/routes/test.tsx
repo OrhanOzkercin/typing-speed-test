@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AnimatedBackground } from "~/components/animated-background";
 import { Button } from "~/components/ui/button";
 import { Timer, RefreshCcw, Dumbbell } from "lucide-react";
 import { cn } from "~/lib/utils";
@@ -324,7 +325,12 @@ export default function TestPage() {
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden">
-   
+      {/* Background with fade effect */}
+      {!isStarted && (
+        <div className="transition-opacity duration-1000">
+          <AnimatedBackground />
+        </div>
+      )}
       
       <div className={cn(
         "container mx-auto relative z-10 transition-colors duration-700",

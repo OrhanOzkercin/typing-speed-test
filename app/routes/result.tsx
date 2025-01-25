@@ -2,6 +2,7 @@ import { useNavigate, useLocation, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Target, Keyboard, RotateCcw, Gauge, Zap } from "lucide-react";
 import { cn } from "~/lib/utils";
+import { AnimatedBackground } from "~/components/animated-background";
 import type { LoaderFunction } from "@remix-run/node";
 import { getRecentTestResults, getBestResults } from "~/models/test-result.server";
 import { json } from "@remix-run/node";
@@ -64,7 +65,9 @@ export default function ResultPage() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-
+      <div className="transition-opacity duration-1000">
+        <AnimatedBackground />
+      </div>
 
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col items-center justify-center min-h-screen px-4 space-y-12">
